@@ -1,19 +1,29 @@
 import React, { useEffect, useState, useRef } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 
+// ✅ Import all product images
+import goldSneaker from "../assets/goldsneaker.jpg";
+import laptop1 from "../assets/laptop.webp";
+import headset1 from "../assets/headset.jpg";
+import watch from "../assets/watch.jpg";
+import laptop2 from "../assets/laptop.webp";
+import headset2 from "../assets/headset.jpg";
+import boot from "../assets/boot.jpg";
+import swatch from "../assets/watch.jpg";
+
 const products = [
-  { id: 1, name: "Nike Air Max Sneakers", price: 45000, image: "/src/assets/goldsneaker.jpg" },
-  { id: 2, name: "HP Pavilion Laptop", price: 320000, image: "/src/assets/laptop.webp" },
-  { id: 3, name: "Wireless Bluetooth Headset", price: 15000, image: "/src/assets/headset.jpg" },
-  { id: 4, name: "Casio Wrist Watch", price: 28000, image: "/src/assets/watch.jpg" },
-  { id: 5, name: "Dell Inspiron", price: 295000, image: "/src/assets/laptop2.jpg" },
-  { id: 6, name: "Beats Studio Headphones", price: 80000, image: "/src/assets/headset2.jpg" },
-  { id: 7, name: "Timberland Boots", price: 65000, image: "/src/assets/boot.jpg" },
-  { id: 8, name: "Samsung Smartwatch", price: 90000, image: "/src/assets/swatch.jpg" },
+  { id: 1, name: "Nike Air Max Sneakers", price: 45000, image: goldSneaker },
+  { id: 2, name: "HP Pavilion Laptop", price: 320000, image: laptop1 },
+  { id: 3, name: "Wireless Bluetooth Headset", price: 15000, image: headset1 },
+  { id: 4, name: "Casio Wrist Watch", price: 28000, image: watch },
+  { id: 5, name: "Dell Inspiron", price: 295000, image: laptop2 },
+  { id: 6, name: "Beats Studio Headphones", price: 80000, image: headset2 },
+  { id: 7, name: "Timberland Boots", price: 65000, image: boot },
+  { id: 8, name: "Samsung Smartwatch", price: 90000, image: swatch },
 ];
 
 const ITEMS_PER_PAGE = 4;
-const ROTATION_INTERVAL_MS = 5000; // SLOWER NOW (5 seconds)
+const ROTATION_INTERVAL_MS = 5000;
 
 const ProductGridCarouselAuto = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,7 +36,7 @@ const ProductGridCarouselAuto = () => {
     setTimeout(() => {
       setCurrentIndex((prev) => (prev + 1) % products.length);
       setAnimate(false);
-    }, 350); // match transition duration
+    }, 350);
   };
 
   const prevStep = () => {
@@ -50,7 +60,6 @@ const ProductGridCarouselAuto = () => {
   useEffect(() => {
     if (isPaused) return;
     intervalRef.current = setInterval(() => nextStep(), ROTATION_INTERVAL_MS);
-
     return () => clearInterval(intervalRef.current);
   }, [isPaused]);
 
@@ -63,7 +72,6 @@ const ProductGridCarouselAuto = () => {
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
-      {/* Container with smooth slide animation */}
       <div
         className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 transition-all duration-500 ${
           animate ? "opacity-0 -translate-x-3" : "opacity-100 translate-x-0"
@@ -85,7 +93,6 @@ const ProductGridCarouselAuto = () => {
         ))}
       </div>
 
-      {/* Navigation */}
       <button
         onClick={prevStep}
         className="absolute top-1/2 left-3 transform -translate-y-1/2 bg-black bg-opacity-40 p-3 text-white rounded-full hover:bg-opacity-80"
@@ -100,7 +107,6 @@ const ProductGridCarouselAuto = () => {
         <ArrowRight />
       </button>
 
-      {/* Indicators */}
       <div className="flex justify-center mt-4 space-x-2">
         {Array.from({ length: totalPages }).map((_, index) => (
           <div

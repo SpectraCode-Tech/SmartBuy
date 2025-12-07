@@ -1,7 +1,7 @@
 import React from 'react'
 import Hero from '../components/Hero'
 import ProductSlider from '../components/Products'
-import ProductCards from './Product-Cards'
+import ProductCards from '../components/Product-Cards'
 
 const Home = () => {
   return (
